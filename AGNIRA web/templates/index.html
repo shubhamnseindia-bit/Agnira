@@ -1,0 +1,1356 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AGNIRA LOGISTICS - Professional Logistics Solutions</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.6); }
+    }
+
+    .page-wrapper {
+      width: 100%;
+      min-height: 100%;
+      background: linear-gradient(135deg, #0a1828 0%, #1a2332 50%, #2a3847 100%);
+    }
+
+    /* Navigation */
+    .navbar {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      padding: 1.2rem 5%;
+      background: rgba(10, 24, 40, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+      animation: fadeIn 0.5s ease;
+    }
+
+    .navbar.scrolled {
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      animation: slideInLeft 0.6s ease;
+    }
+
+    .logo-icon {
+      width: 50px;
+      height: 50px;
+      animation: pulse 2s infinite;
+    }
+
+    .logo-text h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 1px;
+    }
+
+    .logo-text p {
+      margin: 0;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.7);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      animation: slideInRight 0.6s ease;
+    }
+
+    .nav-link {
+      color: rgba(255, 255, 255, 0.9);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #ffd700;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link:hover {
+      color: #ffd700;
+    }
+
+    /* Hero Section */
+    .hero {
+      width: 100%;
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8rem 5% 4rem 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 237, 78, 0.1) 0%, transparent 50%);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 0.6rem 1.5rem;
+      background: rgba(255, 215, 0, 0.1);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      border-radius: 50px;
+      color: #ffd700;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .hero h1 {
+      font-size: 4.5rem;
+      font-weight: 900;
+      margin: 0 0 1.5rem 0;
+      color: white;
+      line-height: 1.1;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero-highlight {
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 1.4rem;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 3rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeInUp 1.2s ease;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeInUp 1.4s ease;
+    }
+
+    .btn-primary {
+      padding: 1.2rem 3rem;
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+      color: #0a1828;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+      border: none;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+      animation: glow 1.5s infinite;
+    }
+
+    .btn-secondary {
+      padding: 1.2rem 3rem;
+      background: transparent;
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: #ffd700;
+      color: #ffd700;
+      transform: translateY(-3px);
+    }
+
+    /* Stats Section */
+    .stats {
+      width: 100%;
+      padding: 4rem 5%;
+      background: rgba(255, 215, 0, 0.05);
+      border-top: 1px solid rgba(255, 215, 0, 0.1);
+      border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+    }
+
+    .stats-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 3rem;
+    }
+
+    .stat-item {
+      text-align: center;
+      animation: fadeInUp 0.8s ease;
+      transition: transform 0.3s ease;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-10px);
+    }
+
+    .stat-number {
+      font-size: 3.5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.8);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    /* Services Section */
+    .services {
+      width: 100%;
+      padding: 6rem 5%;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 5rem auto;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .section-badge {
+      display: inline-block;
+      padding: 0.5rem 1.2rem;
+      background: rgba(255, 215, 0, 0.1);
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      border-radius: 50px;
+      color: #ffd700;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 800;
+      color: white;
+      margin: 0 0 1rem 0;
+    }
+
+    .section-subtitle {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+    }
+
+    .services-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .service-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 1s ease;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #ffd700, #ffed4e);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .service-card:hover {
+      transform: translateY(-15px);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 215, 0, 0.3);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .service-icon {
+      width: 70px;
+      height: 70px;
+      margin-bottom: 1.5rem;
+      transition: transform 0.4s ease;
+    }
+
+    .service-card:hover .service-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .service-card h3 {
+      font-size: 1.6rem;
+      color: #ffd700;
+      margin: 0 0 1rem 0;
+      font-weight: 700;
+    }
+
+    .service-card p {
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.7;
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    /* About Section */
+    .about {
+      width: 100%;
+      padding: 6rem 5%;
+      background: rgba(255, 215, 0, 0.03);
+    }
+
+    .about-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text {
+      animation: slideInLeft 1s ease;
+    }
+
+    .about-text h2 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: white;
+      margin: 0 0 1.5rem 0;
+    }
+
+    .about-text p {
+      font-size: 1.15rem;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .about-features {
+      animation: slideInRight 1s ease;
+    }
+
+    .feature-item {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .feature-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 215, 0, 0.3);
+      transform: translateX(10px);
+    }
+
+    .feature-item h4 {
+      font-size: 1.3rem;
+      color: #ffd700;
+      margin: 0 0 0.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .feature-icon {
+      font-size: 1.5rem;
+    }
+
+    .feature-item p {
+      color: rgba(255, 255, 255, 0.75);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* Why Choose Us */
+    .why-choose {
+      width: 100%;
+      padding: 6rem 5%;
+    }
+
+    .why-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .why-card {
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      animation: fadeInUp 1s ease;
+    }
+
+    .why-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-10px);
+      border-color: rgba(255, 215, 0, 0.3);
+    }
+
+    .why-icon-wrapper {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem auto;
+      background: rgba(255, 215, 0, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .why-card:hover .why-icon-wrapper {
+      background: rgba(255, 215, 0, 0.2);
+      transform: rotate(360deg);
+    }
+
+    .why-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .why-card h4 {
+      font-size: 1.4rem;
+      color: white;
+      margin: 0 0 1rem 0;
+      font-weight: 700;
+    }
+
+    .why-card p {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Contact Section */
+    .contact {
+      width: 100%;
+      padding: 6rem 5%;
+      background: rgba(255, 215, 0, 0.03);
+    }
+
+    .contact-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .contact-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      animation: fadeInUp 1s ease;
+    }
+
+    .contact-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 215, 0, 0.3);
+      transform: translateY(-10px);
+    }
+
+    .contact-icon-wrapper {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 1.5rem auto;
+      background: rgba(255, 215, 0, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-card-icon {
+      width: 35px;
+      height: 35px;
+    }
+
+    .contact-card h3 {
+      font-size: 1.4rem;
+      color: #ffd700;
+      margin: 0 0 1rem 0;
+      font-weight: 700;
+    }
+
+    .contact-card p {
+      color: rgba(255, 255, 255, 0.85);
+      margin: 0.5rem 0;
+      font-size: 1.05rem;
+      word-break: break-word;
+    }
+
+    .contact-card a {
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .contact-card a:hover {
+      color: #ffd700;
+    }
+
+    /* CTA Section */
+    .cta {
+      width: 100%;
+      padding: 6rem 5%;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 237, 78, 0.05) 100%);
+    }
+
+    .cta-content {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      animation: fadeInUp 1s ease;
+    }
+
+    .cta-content h2 {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: white;
+      margin: 0 0 1.5rem 0;
+      line-height: 1.2;
+    }
+
+    .cta-content p {
+      font-size: 1.3rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 3rem;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .footer {
+      width: 100%;
+      padding: 3rem 5%;
+      background: rgba(0, 0, 0, 0.3);
+      border-top: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .footer-logo {
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-logo h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-link:hover {
+      color: #ffd700;
+    }
+
+    .footer-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+      margin: 2rem 0;
+    }
+
+    .footer-bottom {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+    }
+
+    /* Scroll to Top Button */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+      box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .scroll-top:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(255, 215, 0, 0.5);
+    }
+
+    .scroll-top svg {
+      width: 24px;
+      height: 24px;
+      fill: #0a1828;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 968px) {
+      .hero h1 {
+        font-size: 3rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.2rem;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+      }
+
+      .cta-content h2 {
+        font-size: 2.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+      }
+
+      .logo-text h1 {
+        font-size: 1.4rem;
+      }
+
+      .services-grid,
+      .contact-grid,
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Smooth animations on scroll */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .animate-on-scroll.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="page-wrapper"><!-- Navigation -->
+   <nav class="navbar" id="navbar">
+    <div class="nav-content">
+     <div class="logo">
+      <svg class="logo-icon" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="24" width="48" height="20" fill="#ffd700" rx="2" /> <circle cx="18" cy="50" r="5" fill="#ffd700" /> <circle cx="46" cy="50" r="5" fill="#ffd700" /> <rect x="12" y="16" width="40" height="8" fill="#ffed4e" /> <path d="M56 30 L62 26 L62 42 L56 44 Z" fill="#ffaa00" />
+      </svg>
+      <div class="logo-text">
+       <h1 id="nav-company-name">AGNIRA LOGISTICS</h1>
+       <p id="nav-tagline">SPEEDING TO SUCCESS</p>
+      </div>
+     </div>
+     <div class="nav-links"><a href="#services" class="nav-link">Services</a> <a href="#about" class="nav-link">About</a> <a href="#contact" class="nav-link">Contact</a>
+     </div>
+    </div>
+   </nav><!-- Hero Section -->
+   <section class="hero">
+    <div class="hero-content">
+     <div class="hero-badge">
+      🚚 Trusted by Businesses Across India
+     </div>
+     <h1 id="hero-title">Your Global <span class="hero-highlight" id="hero-highlight">Logistics</span> Partner</h1>
+     <p class="hero-subtitle" id="hero-subtitle">Fast, reliable, and secure transportation solutions that deliver excellence across continents. Your cargo, our commitment.</p>
+     <div class="hero-buttons"><button class="btn-primary" id="hero-cta" onclick="scrollToSection('contact')">Get Started Today</button> <button class="btn-secondary" onclick="scrollToSection('services')">Explore Services</button>
+     </div>
+    </div>
+   </section><!-- Stats Section -->
+   <section class="stats">
+    <div class="stats-grid">
+     <div class="stat-item animate-on-scroll">
+      <div class="stat-number" id="stat-1-number">
+       500+
+      </div>
+      <div class="stat-label" id="stat-1-label">
+       Successful Deliveries
+      </div>
+     </div>
+     <div class="stat-item animate-on-scroll">
+      <div class="stat-number" id="stat-2-number">
+       1000+
+      </div>
+      <div class="stat-label" id="stat-2-label">
+       Fleet Owners Network
+      </div>
+     </div>
+     <div class="stat-item animate-on-scroll">
+      <div class="stat-number" id="stat-3-number">
+       98%
+      </div>
+      <div class="stat-label" id="stat-3-label">
+       On-Time Delivery
+      </div>
+     </div>
+     <div class="stat-item animate-on-scroll">
+      <div class="stat-number" id="stat-4-number">
+       24/7
+      </div>
+      <div class="stat-label" id="stat-4-label">
+       Customer Support
+      </div>
+     </div>
+    </div>
+   </section><!-- Services Section -->
+   <section class="services" id="services">
+    <div class="section-header animate-on-scroll">
+     <div class="section-badge">
+      Our Services
+     </div>
+     <h2 class="section-title" id="services-heading">Comprehensive Logistics Solutions</h2>
+     <p class="section-subtitle">End-to-end logistics services tailored to your business needs</p>
+    </div>
+    <div class="services-grid">
+     <div class="service-card animate-on-scroll">
+      <svg class="service-icon" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="24" width="48" height="24" fill="#ffd700" rx="2" /> <circle cx="18" cy="52" r="4" fill="#ffd700" /> <circle cx="46" cy="52" r="4" fill="#ffd700" /> <rect x="12" y="16" width="40" height="8" fill="#ffed4e" /> <path d="M56 32 L60 28 L60 44 L56 48 Z" fill="#ffaa00" />
+      </svg>
+      <h3 id="service-1-title">Freight Transportation</h3>
+      <p id="service-1-desc">Comprehensive ground, air, and sea freight solutions ensuring your cargo reaches its destination safely and on time across all continents.</p>
+     </div>
+     
+     <div class="service-card animate-on-scroll">
+      <svg class="service-icon" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="24" fill="none" stroke="#ffd700" stroke-width="3" /> <path d="M32 16 L32 32 L44 32" stroke="#ffed4e" stroke-width="3" stroke-linecap="round" /> <circle cx="32" cy="32" r="3" fill="#ffd700" /> <path d="M44 20 L50 14 M20 44 L14 50 M44 44 L50 50" stroke="#ffaa00" stroke-width="2" stroke-linecap="round" />
+      </svg>
+      <h3 id="service-3-title">Express Delivery</h3>
+      <p id="service-3-desc">Time-critical shipments delivered with unmatched speed and precision. Same-day and next-day delivery options available for urgent needs.</p>
+     </div>
+     <div class="service-card animate-on-scroll">
+      <svg class="service-icon" viewbox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><rect x="16" y="12" width="32" height="40" fill="none" stroke="#ffd700" stroke-width="3" rx="2" /> <path d="M24 20 L40 20 M24 28 L40 28 M24 36 L32 36" stroke="#ffed4e" stroke-width="2" stroke-linecap="round" /> <circle cx="38" cy="44" r="3" fill="#ffd700" />
+      </svg>
+      <h3 id="service-4-title">Supply Chain Management</h3>
+      <p id="service-4-desc">End-to-end supply chain optimization with real-time visibility, predictive analytics, and seamless coordination across all touchpoints.</p>
+     </div>
+    </div>
+   </section><!-- About Section -->
+   <section class="about" id="about">
+    <div class="about-content">
+     <div class="about-text">
+      <div class="section-badge">
+       About Us
+      </div>
+      <h2 id="about-heading">Leading the Future of Global Logistics</h2>
+      <p id="about-text">AGNIRA LOGISTICS is a premier logistics company with over a decade of experience in delivering world-class transportation and supply chain solutions. We combine cutting-edge technology with exceptional service to ensure your cargo reaches its destination safely, efficiently, and on time. Our commitment to excellence and customer satisfaction has made us the trusted partner for businesses across 50+ countries.</p>
+     </div>
+     <div class="about-features">
+      <div class="feature-item animate-on-scroll">
+       <h4><span class="feature-icon">✓</span> <span id="feature-2-title">Real-Time Tracking</span></h4>
+       <p id="feature-2-desc">Advanced GPS and IoT technology for complete shipment visibility</p>
+      </div>
+      <div class="feature-item animate-on-scroll">
+       <h4><span class="feature-icon">✓</span> <span id="feature-3-title">Expert Team</span></h4>
+       <p id="feature-3-desc">Seasoned professionals dedicated to optimizing your logistics operations</p>
+      </div>
+      <div class="feature-item animate-on-scroll">
+       <h4><span class="feature-icon">✓</span> <span id="feature-4-title">Eco-Friendly Solutions</span></h4>
+       <p id="feature-4-desc">Sustainable practices reducing carbon footprint without compromising efficiency</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Why Choose Us -->
+   <section class="why-choose">
+    <div class="section-header animate-on-scroll">
+     <div class="section-badge">
+      Why Choose Us
+     </div>
+     <h2 class="section-title" id="why-choose-heading">What Sets Us Apart</h2>
+    </div>
+    <div class="why-grid">
+     <div class="why-card animate-on-scroll">
+      <div class="why-icon-wrapper">
+       <svg class="why-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#ffd700"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+       </svg>
+      </div>
+      <h4>Excellence</h4>
+      <p>Unwavering commitment to delivering exceptional service on every shipment</p>
+     </div>
+     <div class="why-card animate-on-scroll">
+      <div class="why-icon-wrapper">
+       <svg class="why-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#ffd700"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
+       </svg>
+      </div>
+      <h4>Security</h4>
+      <p>Advanced security measures protecting your valuable cargo at every step</p>
+     </div>
+     <div class="why-card animate-on-scroll">
+      <div class="why-icon-wrapper">
+       <svg class="why-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#ffd700"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+       </svg>
+      </div>
+      <h4>Reliability</h4>
+      <p>98% on-time delivery rate backed by proven track record</p>
+     </div>
+     <div class="why-card animate-on-scroll">
+      <div class="why-icon-wrapper">
+       <svg class="why-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#ffd700"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" />
+       </svg>
+      </div>
+      <h4>Support</h4>
+      <p>24/7 dedicated customer support team ready to assist you anytime</p>
+     </div>
+    </div>
+   </section><!-- Contact Section -->
+   <section class="contact" id="contact">
+    <div class="contact-wrapper">
+     <div class="section-header animate-on-scroll">
+      <div class="section-badge">
+       Get In Touch
+      </div>
+      <h2 class="section-title">Contact Our Team</h2>
+      <p class="section-subtitle">Ready to optimize your logistics? Reach out to us today</p>
+     </div>
+     <div class="contact-grid">
+      <div class="contact-card animate-on-scroll">
+       <div class="contact-icon-wrapper">
+        <svg class="contact-card-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#ffd700"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+        </svg>
+       </div>
+       <h3>Email Us</h3>
+       <p><a href="mailto:shubham.agniralogistics@gmail.com" id="email-1">shubham.agniralogistics@gmail.com</a></p>
+       <p><a href="mailto:adarsh.agniralogistics@gmail.com" id="email-2">adarsh.agniralogistics@gmail.com</a></p>
+      </div>
+      <div class="contact-card animate-on-scroll">
+       <div class="contact-icon-wrapper">
+        <svg class="contact-card-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#ffd700"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+        </svg>
+       </div>
+       <h3>Call Us</h3>
+       <p id="contact-phone">+91 8757589370</p>
+       <p id="contact-mobile">+91 8401264256</p>
+      </div>
+      <div class="contact-card animate-on-scroll">
+       <div class="contact-icon-wrapper">
+        <svg class="contact-card-icon" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#ffd700"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+        </svg>
+       </div>
+       <h3>Visit Us</h3>
+       <p id="contact-address">Shed No.359 ,shop No 04 G.I.D.C  Estate ,Ramangamdi POR , Vadodara -391243</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- CTA Section -->
+   <section class="cta">
+    <div class="cta-content animate-on-scroll">
+     <h2 id="cta-heading">Ready to Transform Your Logistics?</h2>
+     <p id="cta-subtext">Join thousands of satisfied customers who trust us with their cargo. Get started with AGNIRA LOGISTICS today.</p><button class="btn-primary" id="cta-button" onclick="scrollToSection('contact')">Request a Quote</button>
+    </div>
+   </section><!-- Footer -->
+   <footer class="footer">
+    <div class="footer-content">
+     <div class="footer-logo">
+      <h3>AGNIRA LOGISTICS</h3>
+     </div>
+     <div class="footer-links"><a href="#services" class="footer-link">Services</a> <a href="#about" class="footer-link">About Us</a> <a href="#contact" class="footer-link">Contact</a> <a href="#" class="footer-link">Privacy Policy</a> <a href="#" class="footer-link">Terms of Service</a>
+     </div>
+     <div class="footer-divider"></div>
+     <div class="footer-bottom">
+      <p>© 2024 AGNIRA LOGISTICS. All rights reserved. | Speeding to Success</p>
+     </div>
+    </div>
+   </footer><!-- Scroll to Top Button -->
+   <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+    <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+    </svg>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      company_name: "AGNIRA LOGISTICS",
+      tagline: "SPEEDING TO SUCCESS",
+      hero_title: "Your Global Logistics Partner",
+      hero_subtitle: "Fast, reliable, and secure transportation solutions that deliver excellence across continents. Your cargo, our commitment.",
+      hero_button_text: "Get Started Today",
+      stat_1_number: "1000+",
+      stat_1_label: "Successful Deliveries",
+      stat_2_number: "500+",
+      stat_2_label: "Fleet Owners Network",
+      stat_3_number: "98%",
+      stat_3_label: "On-Time Delivery",
+      stat_4_number: "24/7",
+      stat_4_label: "Customer Support",
+      services_heading: "Comprehensive Logistics Solutions",
+      service_1_title: "Freight Transportation",
+      service_1_desc: "Comprehensive ground, air, and sea freight solutions ensuring your cargo reaches its destination safely and on time across all continents.",
+      service_3_title: "Express Delivery",
+      service_3_desc: "Time-critical shipments delivered with unmatched speed and precision. Same-day and next-day delivery options available for urgent needs.",
+      service_4_title: "Supply Chain Management",
+      service_4_desc: "End-to-end supply chain optimization with real-time visibility, predictive analytics, and seamless coordination across all touchpoints.",
+      about_heading: "Leading the Future of Global Logistics",
+      about_text: "AGNIRA LOGISTICS is a premier logistics company with over a decade of experience in delivering world-class transportation and supply chain solutions. We combine cutting-edge technology with exceptional service to ensure your cargo reaches its destination safely, efficiently, and on time. Our commitment to excellence and customer satisfaction has made us the trusted partner for businesses across 50+ countries.",
+      why_choose_heading: "What Sets Us Apart",
+      feature_2_title: "Real-Time Tracking",
+      feature_3_title: "Expert Team",
+      feature_3_desc: "Seasoned professionals dedicated to optimizing your logistics operations",
+      feature_4_title: "Eco-Friendly Solutions",
+      feature_4_desc: "Sustainable practices reducing carbon footprint without compromising efficiency",
+      phone_number: "+91 8757589370",
+      mobile_number: "+91 8401264256",
+      email_1: "shubham.agniralogistics@gmail.com",
+      email_2: "adarsh.agniralogistics@gmail.com",
+      address: "Global Logistics Hub, Business District, International Trade Center",
+      cta_heading: "Ready to Transform Your Logistics?",
+      cta_subtext: "Join thousands of satisfied customers who trust us with their cargo. Get started with AGNIRA LOGISTICS today.",
+      cta_button_text: "Request a Quote",
+      background_color: "#0a1828",
+      surface_color: "rgba(255, 255, 255, 0.05)",
+      text_color: "#ffffff",
+      primary_action_color: "#ffd700",
+      secondary_accent_color: "#ffed4e"
+    };
+
+    function scrollToSection(id) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Scroll animations
+    function handleScrollAnimations() {
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      elements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight * 0.85;
+        if (isVisible) {
+          el.classList.add('animated');
+        }
+      });
+    }
+
+    // Scroll to top button visibility
+    function handleScrollTopButton() {
+      const scrollTop = document.getElementById('scrollTop');
+      if (window.scrollY > 500) {
+        scrollTop.classList.add('visible');
+      } else {
+        scrollTop.classList.remove('visible');
+      }
+    }
+
+    // Navbar scroll effect
+    function handleNavbarScroll() {
+      const navbar = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }
+
+    window.addEventListener('scroll', () => {
+      handleScrollAnimations();
+      handleScrollTopButton();
+      handleNavbarScroll();
+    });
+
+    window.addEventListener('load', () => {
+      handleScrollAnimations();
+    });
+
+    async function onConfigChange(config) {
+      // Update company name and tagline
+      document.getElementById('nav-company-name').textContent = config.company_name || defaultConfig.company_name;
+      document.getElementById('nav-tagline').textContent = config.tagline || defaultConfig.tagline;
+      
+      // Update hero section
+      const heroTitle = config.hero_title || defaultConfig.hero_title;
+      const words = heroTitle.split(' ');
+      let highlightWord = 'Logistics';
+      if (words.length >= 2) {
+        highlightWord = words[words.length - 2];
+      }
+      const titleWithHighlight = heroTitle.replace(highlightWord, `<span class="hero-highlight">${highlightWord}</span>`);
+      document.getElementById('hero-title').innerHTML = titleWithHighlight;
+      document.getElementById('hero-subtitle').textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
+      document.getElementById('hero-cta').textContent = config.hero_button_text || defaultConfig.hero_button_text;
+      
+      // Update stats
+      document.getElementById('stat-1-number').textContent = config.stat_1_number || defaultConfig.stat_1_number;
+      document.getElementById('stat-1-label').textContent = config.stat_1_label || defaultConfig.stat_1_label;
+      document.getElementById('stat-2-number').textContent = config.stat_2_number || defaultConfig.stat_2_number;
+      document.getElementById('stat-2-label').textContent = config.stat_2_label || defaultConfig.stat_2_label;
+      document.getElementById('stat-3-number').textContent = config.stat_3_number || defaultConfig.stat_3_number;
+      document.getElementById('stat-3-label').textContent = config.stat_3_label || defaultConfig.stat_3_label;
+      document.getElementById('stat-4-number').textContent = config.stat_4_number || defaultConfig.stat_4_number;
+      document.getElementById('stat-4-label').textContent = config.stat_4_label || defaultConfig.stat_4_label;
+      
+      // Update services
+      document.getElementById('services-heading').textContent = config.services_heading || defaultConfig.services_heading;
+      document.getElementById('service-1-title').textContent = config.service_1_title || defaultConfig.service_1_title;
+      document.getElementById('service-1-desc').textContent = config.service_1_desc || defaultConfig.service_1_desc;
+      document.getElementById('service-2-title').textContent = config.service_2_title || defaultConfig.service_2_title;
+      document.getElementById('service-2-desc').textContent = config.service_2_desc || defaultConfig.service_2_desc;
+      document.getElementById('service-3-title').textContent = config.service_3_title || defaultConfig.service_3_title;
+      document.getElementById('service-3-desc').textContent = config.service_3_desc || defaultConfig.service_3_desc;
+      document.getElementById('service-4-title').textContent = config.service_4_title || defaultConfig.service_4_title;
+      document.getElementById('service-4-desc').textContent = config.service_4_desc || defaultConfig.service_4_desc;
+      
+      // Update about section
+      document.getElementById('about-heading').textContent = config.about_heading || defaultConfig.about_heading;
+      document.getElementById('about-text').textContent = config.about_text || defaultConfig.about_text;
+      document.getElementById('why-choose-heading').textContent = config.why_choose_heading || defaultConfig.why_choose_heading;
+      
+      // Update features
+      document.getElementById('feature-1-title').textContent = config.feature_1_title || defaultConfig.feature_1_title;
+      document.getElementById('feature-1-desc').textContent = config.feature_1_desc || defaultConfig.feature_1_desc;
+      document.getElementById('feature-2-title').textContent = config.feature_2_title || defaultConfig.feature_2_title;
+      document.getElementById('feature-2-desc').textContent = config.feature_2_desc || defaultConfig.feature_2_desc;
+      document.getElementById('feature-3-title').textContent = config.feature_3_title || defaultConfig.feature_3_title;
+      document.getElementById('feature-3-desc').textContent = config.feature_3_desc || defaultConfig.feature_3_desc;
+      document.getElementById('feature-4-title').textContent = config.feature_4_title || defaultConfig.feature_4_title;
+      document.getElementById('feature-4-desc').textContent = config.feature_4_desc || defaultConfig.feature_4_desc;
+      
+      // Update contact info
+      document.getElementById('contact-phone').textContent = config.phone_number || defaultConfig.phone_number;
+      document.getElementById('contact-mobile').textContent = config.mobile_number || defaultConfig.mobile_number;
+      document.getElementById('email-1').textContent = config.email_1 || defaultConfig.email_1;
+      document.getElementById('email-1').href = `mailto:${config.email_1 || defaultConfig.email_1}`;
+      document.getElementById('email-2').textContent = config.email_2 || defaultConfig.email_2;
+      document.getElementById('email-2').href = `mailto:${config.email_2 || defaultConfig.email_2}`;
+      document.getElementById('contact-address').textContent = config.address || defaultConfig.address;
+      
+      // Update CTA section
+      document.getElementById('cta-heading').textContent = config.cta_heading || defaultConfig.cta_heading;
+      document.getElementById('cta-subtext').textContent = config.cta_subtext || defaultConfig.cta_subtext;
+      document.getElementById('cta-button').textContent = config.cta_button_text || defaultConfig.cta_button_text;
+
+      // Update colors
+      const bgColor = config.background_color || defaultConfig.background_color;
+      const surfaceColor = config.surface_color || defaultConfig.surface_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
+      const secondaryColor = config.secondary_accent_color || defaultConfig.secondary_accent_color;
+      
+      document.querySelector('.page-wrapper').style.background = `linear-gradient(135deg, ${bgColor} 0%, #1a2332 50%, #2a3847 100%)`;
+      
+      document.querySelectorAll('.btn-primary').forEach(btn => {
+        btn.style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
+      });
+      
+      document.querySelectorAll('.service-card, .contact-card, .why-card, .feature-item').forEach(card => {
+        card.style.background = surfaceColor;
+      });
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.background_color || defaultConfig.background_color,
+              set: (value) => {
+                window.elementSdk.config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                window.elementSdk.config.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                window.elementSdk.config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => config.primary_action_color || defaultConfig.primary_action_color,
+              set: (value) => {
+                window.elementSdk.config.primary_action_color = value;
+                window.elementSdk.setConfig({ primary_action_color: value });
+              }
+            },
+            {
+              get: () => config.secondary_accent_color || defaultConfig.secondary_accent_color,
+              set: (value) => {
+                window.elementSdk.config.secondary_accent_color = value;
+                window.elementSdk.setConfig({ secondary_accent_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["company_name", config.company_name || defaultConfig.company_name],
+          ["tagline", config.tagline || defaultConfig.tagline],
+          ["hero_title", config.hero_title || defaultConfig.hero_title],
+          ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+          ["hero_button_text", config.hero_button_text || defaultConfig.hero_button_text],
+          ["stat_1_number", config.stat_1_number || defaultConfig.stat_1_number],
+          ["stat_1_label", config.stat_1_label || defaultConfig.stat_1_label],
+          ["stat_2_number", config.stat_2_number || defaultConfig.stat_2_number],
+          ["stat_2_label", config.stat_2_label || defaultConfig.stat_2_label],
+          ["stat_3_number", config.stat_3_number || defaultConfig.stat_3_number],
+          ["stat_3_label", config.stat_3_label || defaultConfig.stat_3_label],
+          ["stat_4_number", config.stat_4_number || defaultConfig.stat_4_number],
+          ["stat_4_label", config.stat_4_label || defaultConfig.stat_4_label],
+          ["services_heading", config.services_heading || defaultConfig.services_heading],
+          ["service_1_title", config.service_1_title || defaultConfig.service_1_title],
+          ["service_1_desc", config.service_1_desc || defaultConfig.service_1_desc],
+          ["service_2_title", config.service_2_title || defaultConfig.service_2_title],
+          ["service_2_desc", config.service_2_desc || defaultConfig.service_2_desc],
+          ["service_3_title", config.service_3_title || defaultConfig.service_3_title],
+          ["service_3_desc", config.service_3_desc || defaultConfig.service_3_desc],
+          ["service_4_title", config.service_4_title || defaultConfig.service_4_title],
+          ["service_4_desc", config.service_4_desc || defaultConfig.service_4_desc],
+          ["about_heading", config.about_heading || defaultConfig.about_heading],
+          ["about_text", config.about_text || defaultConfig.about_text],
+          ["why_choose_heading", config.why_choose_heading || defaultConfig.why_choose_heading],
+          ["feature_1_title", config.feature_1_title || defaultConfig.feature_1_title],
+          ["feature_1_desc", config.feature_1_desc || defaultConfig.feature_1_desc],
+          ["feature_2_title", config.feature_2_title || defaultConfig.feature_2_title],
+          ["feature_2_desc", config.feature_2_desc || defaultConfig.feature_2_desc],
+          ["feature_3_title", config.feature_3_title || defaultConfig.feature_3_title],
+          ["feature_3_desc", config.feature_3_desc || defaultConfig.feature_3_desc],
+          ["feature_4_title", config.feature_4_title || defaultConfig.feature_4_title],
+          ["feature_4_desc", config.feature_4_desc || defaultConfig.feature_4_desc],
+          ["phone_number", config.phone_number || defaultConfig.phone_number],
+          ["mobile_number", config.mobile_number || defaultConfig.mobile_number],
+          ["email_1", config.email_1 || defaultConfig.email_1],
+          ["email_2", config.email_2 || defaultConfig.email_2],
+          ["address", config.address || defaultConfig.address],
+          ["cta_heading", config.cta_heading || defaultConfig.cta_heading],
+          ["cta_subtext", config.cta_subtext || defaultConfig.cta_subtext],
+          ["cta_button_text", config.cta_button_text || defaultConfig.cta_button_text]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a787c7196267f62',t:'MTc2NDY1Mzk5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
