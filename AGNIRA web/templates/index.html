@@ -793,62 +793,39 @@
 
     /* Responsive Design */
     @media (max-width: 968px) {
-      .hero h1 {
-        font-size: 3rem;
-      }
-
-      .hero-subtitle {
-        font-size: 1.2rem;
-      }
-
-      .about-content {
-        grid-template-columns: 1fr;
-      }
-
-      .section-title {
-        font-size: 2.5rem;
-      }
-
-      .cta-content h2 {
-        font-size: 2.5rem;
-      }
-
       .nav-links {
-        display: none;
+        display: flex;              /* keep visible */
+        width: 100%;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;            /* THIS IS THE KEY */
+        margin-top: 10px;
       }
     }
 
     @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-
-      .stat-number {
-        font-size: 2.5rem;
-      }
-
-      .logo-text h1 {
-        font-size: 1.4rem;
-      }
-
-      .services-grid,
-      .contact-grid,
-      .why-grid {
-        grid-template-columns: 1fr;
+      .nav-link {
+        padding: 8px 14px;
+        border-radius: 20px;
+        background: rgba(255,255,255,0.08);
+        border: 1px solid rgba(255,255,255,0.15);
+        font-size: 0.85rem;
+        white-space: nowrap;
       }
     }
 
-    /* Smooth animations on scroll */
-    .animate-on-scroll {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease;
-    }
 
-    .animate-on-scroll.animated {
-      opacity: 1;
-      transform: translateY(0);
-    }
+      /* Smooth animations on scroll */
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease;      
+      }
+
+      .animate-on-scroll.animated {
+        opacity: 1;
+        transform: translateY(0);
+      }
   </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
