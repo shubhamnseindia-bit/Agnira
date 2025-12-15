@@ -801,16 +801,48 @@
         flex-wrap: wrap;            /* THIS IS THE KEY */
         margin-top: 10px;
       }
+      .navbar {
+        position: sticky;
+        top: 0;
+      }
     }
 
     @media (max-width: 768px) {
+
+      /* STACK LOGO + NAV BUTTONS */
+      .nav-content {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero {
+        padding-top: 13rem;
+      }
+
+      /* CENTER LOGO PROPERLY */
+      .logo {
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 6px;
+      }
+
+      /* FIX NAV BUTTON WRAPPING */
+      .nav-links {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      /* BUTTON SIZE FIX */
       .nav-link {
-        padding: 8px 14px;
+        padding: 8px 12px;
+        font-size: 0.85rem;
+        white-space: nowrap;
         border-radius: 20px;
         background: rgba(255,255,255,0.08);
         border: 1px solid rgba(255,255,255,0.15);
-        font-size: 0.85rem;
-        white-space: nowrap;
       }
     }
 

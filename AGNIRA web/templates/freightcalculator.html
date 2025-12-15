@@ -189,32 +189,73 @@
       }
     };
 
-    function getSuggestedVehicles(weight) {
+    function getSuggestedVehicles(weight, distance) {
+      let vehicles = [];
+
+      // ---------------------------
+      // LIGHT LOADS (0 – 2.5 TON)
+      // ---------------------------
       if (weight <= 2.5) {
-        return [
-          { name: "TATA ACE", length: "7ft" },
-          { name: "ASHOK LEYLAND DOST", length: "7ft" },
-          { name: "MAHINDRA BOLERO PICK UP", length: "8ft" },
-          { name: "ASHOK LEYLAND BADA DOST", length: "9.5ft" },
-          { name: "TATA 407", length: "9ft" }
-        ];
-      } else if (weight > 2.5 && weight <= 9) {
-        return [
-          { name: "EICHER", length: "14ft" },
-          { name: "EICHER", length: "17ft" },
-          { name: "EICHER", length: "19ft" }
-        ];
-      } else if (weight > 10 && weight <= 21) {
-        return [
-          { name: "TATA Lorry TAURUS and non taurus 18-25 TON", length: "22ft" },
-          { name: "EICHER", length: "28ft" }
-        ];
-      } else {
-        return [
-          { name: "CONTAINER or ODC VEHICLE", length: "As Required" }
+        if (distance <= 100) {
+          vehicles = [
+            { name: "TATA ACE", length: "7ft", purpose: "City / Local delivery" },
+            { name: "ASHOK LEYLAND DOST", length: "7ft", purpose: "Quick intra-city movement" },
+            { name: "BOLERO PICKUP", length: "8ft", purpose: "Light industrial goods" }
+          ];
+        } else {
+          vehicles = [
+            { name: "ASHOK LEYLAND BADA DOST", length: "9.5ft", purpose: "Intercity small load" },
+            { name: "TATA 407", length: "9ft", purpose: "Better stability for longer distance" }
+          ];
+        }
+      }
+
+      // ---------------------------
+      // MEDIUM LOADS (2.6 – 9 TON)
+      // ---------------------------
+      else if (weight > 2.5 && weight <= 9) {
+        if (distance <= 300) {
+          vehicles = [
+            { name: "EICHER 14 FT", length: "14ft", purpose: "Regional transport" },
+            { name: "EICHER 17 FT", length: "17ft", purpose: "Balanced cost & capacity" }
+          ];
+        } else {
+          vehicles = [
+            { name: "EICHER 19 FT", length: "19ft", purpose: "Long distance efficiency" },
+            { name: "TATA 1109 / 1512", length: "19ft", purpose: "Better mileage on highways" }
+          ];
+        }
+      }
+
+      // ---------------------------
+      // HEAVY LOADS (10 – 21 TON)
+      // ---------------------------
+      else if (weight >= 10 && weight <= 21) {
+        if (distance <= 500) {
+          vehicles = [
+            { name: "TATA TAURUS 6 TYRE", length: "22ft", purpose: "Bulk short-haul movement" }
+          ];
+        } else {
+          vehicles = [
+            { name: "TATA TAURUS 10 TYRE", length: "22ft", purpose: "Highway bulk transport" },
+            { name: "EICHER 28 FT", length: "28ft", purpose: "Volume + weight optimization" }
+          ];
+        }
+      }
+
+      // ---------------------------
+      // VERY HEAVY / SPECIAL LOAD
+      // ---------------------------
+      else {
+        vehicles = [
+          { name: "32 FT CONTAINER", length: "32ft", purpose: "High volume freight" },
+          { name: "ODC / TRAILER", length: "As Required", purpose: "Over-dimensional cargo" }
         ];
       }
+
+      return vehicles;
     }
+
 
     function calculateRate(weight, distance) {
         let ratePerKm;
