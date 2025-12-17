@@ -1,556 +1,248 @@
 <!doctype html>
 <html lang="en" class="h-full">
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Freight Calculator</title>
-  <script src="/_sdk/data_sdk.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agnira Logistics - Freight Calculator</title>
+
   <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
-    body {
-      box-sizing: border-box;
+    body { box-sizing: border-box; }
+    .gradient-bg {
+      background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
     }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .result-card {
+      animation: slideUp 0.4s ease-out;
     }
-
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
-    @keyframes slideInLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes slideInRight {
-      from {
-        opacity: 0;
-        transform: translateX(50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.05);
-      }
-    }
-
-    @keyframes shimmer {
-      0% {
-        background-position: -1000px 0;
-      }
-      100% {
-        background-position: 1000px 0;
-      }
-    }
-
-    @keyframes goldShine {
-      0% {
-        background-position: -200% center;
-      }
-      100% {
-        background-position: 200% center;
-      }
-    }
-
-    .gradient-background {
-      background: #000000;
-    }
-
-    .gold-shine {
-      background: linear-gradient(90deg, #d4af37 0%, #ffd700 25%, #ffed4e 50%, #ffd700 75%, #d4af37 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: goldShine 3s linear infinite;
-    }
-
-    .section-divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #d4af37, transparent);
-      margin: 32px 0;
-    }
-
-    .animate-fade-in-up {
-      animation: fadeInUp 0.6s ease-out;
-    }
-
-    .animate-fade-in-down {
-      animation: fadeInDown 0.6s ease-out;
-    }
-
-    .animate-slide-in-left {
-      animation: slideInLeft 0.6s ease-out;
-    }
-
-    .animate-slide-in-right {
-      animation: slideInRight 0.6s ease-out;
-    }
-
-    .animate-pulse {
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    .shimmer-effect {
-      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
-      background-size: 1000px 100%;
-      animation: shimmer 2s infinite;
-    }
-
-    .input-focus-effect {
-      transition: all 0.3s ease;
-    }
-
-    .input-focus-effect:focus {
-      border-bottom-color: #ffd700;
-      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
-    }
-
-    .button-hover {
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .button-hover::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      background: rgba(255, 255, 255, 0.2);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
-
-    .button-hover:hover::before {
-      width: 300px;
-      height: 300px;
+    .input-focus:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59,130,246,.1);
     }
   </style>
-  <style>@view-transition { navigation: auto; }</style>
- </head>
- <body class="h-full">
-  <div id="app" class="w-full h-full"></div>
-  <script>
-    const defaultConfig = {
-      background_color: "#000000",
-      surface_color: "#1a1a1a",
-      text_color: "#ffffff",
-      accent_color: "#d4af37",
-      button_color: "#ffd700",
-      font_family: "Inter",
-      font_size: 16,
-      page_title: "Freight Calculator",
-      page_subtitle: "Calculate your shipping costs instantly",
-      distance_label: "Distance (in kilometers)",
-      weight_label: "Weight (in tons)",
-      additional_info_label: "Additional Information",
-      button_text: "Calculate Rate"
-    };
+</head>
 
-    let records = [];
+<body class="h-full">
+<div id="app" class="w-full h-full overflow-auto">
 
-    const dataHandler = {
-      onDataChanged(data) {
-        records = data;
-      }
-    };
+  <!-- HEADER -->
+  <header class="gradient-bg text-white py-12 px-6 text-center">
+    <h1 id="companyName" class="text-5xl font-bold mb-3">Agnira Logistics</h1>
+    <h2 id="pageTitle" class="text-3xl font-semibold mb-2">Freight Calculator</h2>
+    <p id="tagline" class="text-xl opacity-90">
+      Calculate your shipping costs instantly
+    </p>
+  </header>
 
-    function getSuggestedVehicles(weight, distance) {
-      let vehicles = [];
+  <!-- MAIN -->
+  <main class="max-w-4xl mx-auto px-6 py-12">
 
-      // ---------------------------
-      // LIGHT LOADS (0 – 2.5 TON)
-      // ---------------------------
-      if (weight <= 2.5) {
-        if (distance <= 100) {
-          vehicles = [
-            { name: "TATA ACE", length: "7ft", purpose: "City / Local delivery" },
-            { name: "ASHOK LEYLAND DOST", length: "7ft", purpose: "Quick intra-city movement" },
-            { name: "BOLERO PICKUP", length: "8ft", purpose: "Light industrial goods" }
-          ];
-        } else {
-          vehicles = [
-            { name: "ASHOK LEYLAND BADA DOST", length: "9.5ft", purpose: "Intercity small load" },
-            { name: "TATA 407", length: "9ft", purpose: "Better stability for longer distance" }
-          ];
-        }
-      }
+    <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+      <form id="freightForm">
 
-      // ---------------------------
-      // MEDIUM LOADS (2.6 – 9 TON)
-      // ---------------------------
-      else if (weight > 2.5 && weight <= 9) {
-        if (distance <= 300) {
-          vehicles = [
-            { name: "EICHER 14 FT", length: "14ft", purpose: "Regional transport" },
-            { name: "EICHER 17 FT", length: "17ft", purpose: "Balanced cost & capacity" }
-          ];
-        } else {
-          vehicles = [
-            { name: "EICHER 19 FT", length: "19ft", purpose: "Long distance efficiency" },
-            { name: "TATA 1109 / 1512", length: "19ft", purpose: "Better mileage on highways" }
-          ];
-        }
-      }
+        <!-- VEHICLE -->
+        <div class="mb-6">
+          <label class="block text-lg font-semibold mb-3">Select Vehicle Type</label>
+          <select id="vehicle" required
+            class="w-full px-4 py-3 text-lg border-2 rounded-lg input-focus">
+            <option value="">Choose a vehicle...</option>
+            <option value="7ft">7 ft - Small Pickup</option>
+            <option value="8ft">8 ft - Medium Pickup</option>
+            <option value="10ft">10 ft - Mini Truck</option>
+            <option value="14ft">14 ft - Standard Truck</option>
+            <option value="17ft">17 ft - Medium Truck</option>
+            <option value="19ft">19 ft - Large Truck</option>
+            <option value="22ft">22 ft - Container Truck</option>
+            <option value="24ft">24 ft - Heavy Container</option>
+            <option value="32sxl">32 ft SXL</option>
+            <option value="32mxl">32 ft MXL</option>
+            <option value="40odc">40 ft ODC</option>
+          </select>
+        </div>
 
-      // ---------------------------
-      // HEAVY LOADS (10 – 21 TON)
-      // ---------------------------
-      else if (weight >= 10 && weight <= 21) {
-        if (distance <= 500) {
-          vehicles = [
-            { name: "TATA TAURUS 6 TYRE", length: "22ft", purpose: "Bulk short-haul movement" }
-          ];
-        } else {
-          vehicles = [
-            { name: "TATA TAURUS 10 TYRE", length: "22ft", purpose: "Highway bulk transport" },
-            { name: "EICHER 28 FT", length: "28ft", purpose: "Volume + weight optimization" }
-          ];
-        }
-      }
+        <!-- WEIGHT -->
+        <div class="mb-6">
+          <label class="block text-lg font-semibold mb-3">Weight (Tons)</label>
+          <input id="weight" type="number" step="0.1" min="0.1" required
+            class="w-full px-4 py-3 text-lg border-2 rounded-lg input-focus" />
+        </div>
 
-      // ---------------------------
-      // VERY HEAVY / SPECIAL LOAD
-      // ---------------------------
-      else {
-        vehicles = [
-          { name: "32 FT CONTAINER", length: "32ft", purpose: "High volume freight" },
-          { name: "ODC / TRAILER", length: "As Required", purpose: "Over-dimensional cargo" }
-        ];
-      }
+        <!-- DISTANCE -->
+        <div class="mb-6">
+          <label class="block text-lg font-semibold mb-3">Distance (KM)</label>
+          <input id="distance" type="number" min="1" required
+            class="w-full px-4 py-3 text-lg border-2 rounded-lg input-focus" />
+        </div>
 
-      return vehicles;
-    }
+        <button id="calculateBtn" type="submit"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xl py-4 rounded-lg">
+          Calculate Freight Cost
+        </button>
 
+      </form>
+    </div>
 
-    function calculateRate(weight, distance) {
-        let ratePerKm;
+    <!-- RESULT -->
+    <div id="resultSection" class="hidden">
+      <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-8 result-card">
+        <h3 class="text-2xl font-bold text-center mb-6">Freight Calculation Result</h3>
 
-        // MARKET RATE PER KM (NOT MILEAGE BASED)
-        if (weight <= 1) {
-            ratePerKm = 21;        // PTL / Pickup
-        } else if (weight <= 3) {
-            ratePerKm = 26;        // Tata Ace / 407
-        } else if (weight <= 7) {
-            ratePerKm = 38;        // 14 ft
-        } else if (weight <= 12) {
-            ratePerKm = 83;        // 22 ft (MATCHES 1,00,000)
-        } else {
-            ratePerKm = 90;        // Heavy truck
-        }
-
-        // MARKET FREIGHT
-        let marketFreight = distance * ratePerKm;
-
-        // COST FLOOR (safety)
-        let mileage = weight <= 1 ? 17 : weight <= 7 ? 7 : 5;
-        let dieselCost = (distance / mileage) * 90;
-
-        let driverCost = distance < 800 ? 3000 : 6000;
-        let toll = distance < 800 ? 2500 : 6000;
-
-        let costFloor = dieselCost + driverCost + toll;
-
-        // FINAL RATE = HIGHER OF MARKET OR COST FLOOR
-        let finalRate = Math.max(marketFreight, costFloor);
-
-        return {
-            ratePerKm,
-            dieselCost: Math.round(dieselCost),
-            driverCost,
-            toll,
-            finalRate: Math.round(finalRate)
-        };
-        }
-
-
-    async function onConfigChange(config) {
-      const customFont = config.font_family || defaultConfig.font_family;
-      const baseSize = config.font_size || defaultConfig.font_size;
-      const backgroundColor = config.background_color || defaultConfig.background_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      const accentColor = config.accent_color || defaultConfig.accent_color;
-
-      const app = document.getElementById('app');
-      app.style.backgroundColor = backgroundColor;
-      app.style.fontFamily = `${customFont}, Arial, sans-serif`;
-      app.style.color = textColor;
-
-      app.innerHTML = `
-        <div class="w-full h-full overflow-auto gradient-background">
-          <div class="container mx-auto px-4 py-8 max-w-4xl">
-            <!-- HEADER -->
-            <header class="text-center mb-8 animate-fade-in-down" style="background: #000000; padding: 32px 24px; border-top: 2px solid ${accentColor}; border-bottom: 2px solid ${accentColor};">
-              <div style="margin: 0 auto; max-width: 700px;">
-                <h1 class="gold-shine" style="font-size: ${baseSize * 1.5}px; font-weight: 800; letter-spacing: 3px;">AGNIRA LOGISTICS</h1>
-                <p style="font-size: ${baseSize * 0.9}px; color: ${textColor}; margin-top: 8px; opacity: 0.9;">Delivering Excellence, Moving Your Business Forward</p>
-                <div style="height: 1px; width: 120px; background: linear-gradient(90deg, transparent, ${accentColor}, transparent); margin: 20px auto;"></div>
-                <h2 style="font-size: ${baseSize * 1.2}px; color: ${textColor}; font-weight: 600; letter-spacing: 1px; margin-bottom: 8px;">${config.page_title || defaultConfig.page_title}</h2>
-                <p style="font-size: ${baseSize * 0.9}px; color: ${accentColor}; font-weight: 500;">${config.page_subtitle || defaultConfig.page_subtitle}</p>
-              </div>
-            </header>
-
-            <div class="section-divider"></div>
-
-            <!-- CALCULATOR -->
-            <main class="animate-fade-in-up" style="padding: 24px;">
-              <form id="freight-form">
-                <div class="mb-6 animate-slide-in-left" style="animation-delay: 0.1s;">
-                  <label for="distance" class="block mb-2" style="font-size: ${baseSize}px; color: ${accentColor}; font-weight: 500;">
-                    ${config.distance_label || defaultConfig.distance_label}
-                  </label>
-                  <input 
-                    type="number" 
-                    id="distance" 
-                    required 
-                    step="1"
-                    min="1"
-                    class="input-focus-effect"
-                    style="width: 100%; padding: 12px 0; border: none; border-bottom: 1px solid ${accentColor}; background-color: transparent; color: ${textColor}; font-size: ${baseSize * 1.1}px; outline: none;"
-                  />
-                </div>
-
-                <div class="mb-6 animate-slide-in-right" style="animation-delay: 0.2s;">
-                  <label for="weight" class="block mb-2" style="font-size: ${baseSize}px; color: ${accentColor}; font-weight: 500;">
-                    ${config.weight_label || defaultConfig.weight_label}
-                  </label>
-                  <input 
-                    type="number" 
-                    id="weight" 
-                    required 
-                    step="0.1"
-                    min="0.1"
-                    class="input-focus-effect"
-                    style="width: 100%; padding: 12px 0; border: none; border-bottom: 1px solid ${accentColor}; background-color: transparent; color: ${textColor}; font-size: ${baseSize * 1.1}px; outline: none;"
-                  />
-                </div>
-
-                <div class="mb-6 animate-slide-in-left" style="animation-delay: 0.3s;">
-                  <label for="additional-info" class="block mb-2" style="font-size: ${baseSize}px; color: ${accentColor}; font-weight: 500;">
-                    ${config.additional_info_label || defaultConfig.additional_info_label}
-                  </label>
-                  <textarea 
-                    id="additional-info" 
-                    rows="3"
-                    class="input-focus-effect"
-                    style="width: 100%; padding: 12px 0; border: none; border-bottom: 1px solid ${accentColor}; background-color: transparent; color: ${textColor}; font-size: ${baseSize * 1.1}px; resize: none; outline: none;"
-                  ></textarea>
-                </div>
-
-                <button 
-                  type="submit" 
-                  id="submit-btn"
-                  class="button-hover animate-pulse"
-                  style="width: 100%; padding: 16px; background: linear-gradient(90deg, #d4af37, #ffd700, #d4af37); color: #000000; font-size: ${baseSize * 1.2}px; font-weight: 900; border: none; cursor: pointer; letter-spacing: 2px; box-shadow: 0 4px 20px rgba(212, 175, 55, 0.5); margin-top: 24px;"
-                >
-                  ${config.button_text || defaultConfig.button_text}
-                </button>
-              </form>
-
-              <!-- Contact -->
-              <div class="animate-fade-in-up" style="margin-top: 32px; padding-top: 24px; border-top: 1px solid ${accentColor}; text-align: center;">
-                <p style="font-size: ${baseSize * 0.85}px; color: ${textColor}; margin-bottom: 12px; opacity: 0.7;">24/7 Support Available</p>
-                <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;">
-                  <a href="tel:8757589370" style="color: ${accentColor}; text-decoration: none; font-weight: 700; font-size: ${baseSize}px;">📞 8757589370</a>
-                  <a href="tel:8401264256" style="color: ${accentColor}; text-decoration: none; font-weight: 700; font-size: ${baseSize}px;">📱 8401264256</a>
-                </div>
-              </div>
-
-              <!-- Results -->
-              <div id="result" style="display: none; margin-top: 32px; padding-top: 32px; border-top: 2px solid ${accentColor};">
-                <h2 class="animate-fade-in-down" style="font-size: ${baseSize * 1.3}px; color: ${accentColor}; font-weight: 600; margin-bottom: 20px; letter-spacing: 1px;">RESULTS</h2>
-                
-                <div style="margin-bottom: 24px;">
-                  <h3 style="font-size: ${baseSize}px; color: ${accentColor}; font-weight: 500; margin-bottom: 12px;">Suggested Vehicles</h3>
-                  <div id="vehicles-list"></div>
-                </div>
-
-                <div style="border-top: 1px solid ${accentColor}; padding-top: 20px;">
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                    <span style="font-size: ${baseSize * 1.1}px; font-weight: 600; color: ${accentColor};">Estimated Rate</span>
-                    <span id="final-rate" class="animate-pulse" style="font-size: ${baseSize * 1.8}px; font-weight: 900; color: ${accentColor};"></span>
-                  </div>
-                  <p style="font-size: ${baseSize * 0.8}px; color: ${textColor}; opacity: 0.7; line-height: 1.5;">
-                    System-generated estimate. Contact us for confirmed rates.
-                  </p>
-                </div>
-              </div>
-            </main>
-
-            <div class="section-divider"></div>
-
-            <!-- Footer -->
-            <footer class="animate-fade-in-up" style="text-align: center; padding: 24px;">
-              <h3 class="gold-shine" style="font-size: ${baseSize * 1.2}px; font-weight: 800; letter-spacing: 2px;">AGNIRA LOGISTICS</h3>
-              <div style="height: 1px; width: 80px; background: linear-gradient(90deg, transparent, ${accentColor}, transparent); margin: 12px auto;"></div>
-              <p style="font-size: ${baseSize * 0.7}px; color: ${accentColor}; opacity: 0.6;">© 2024 Agnira Logistics. All rights reserved.</p>
-            </footer>
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+          <div class="bg-white p-4 rounded">
+            <p class="text-sm text-gray-600">Vehicle</p>
+            <p id="resultVehicle" class="text-xl font-semibold"></p>
+          </div>
+          <div class="bg-white p-4 rounded">
+            <p class="text-sm text-gray-600">Distance</p>
+            <p id="resultDistance" class="text-xl font-semibold"></p>
           </div>
         </div>
-      `;
 
-      setupFormHandler(config);
+        <div class="bg-blue-600 text-white rounded-xl p-6 text-center">
+          <p class="text-lg">Total Freight</p>
+          <p id="resultAmount" class="text-5xl font-bold"></p>
+        </div>
+
+        <ul class="mt-6 bg-white p-4 rounded text-sm space-y-1">
+          <li id="marketFreight"></li>
+          <li id="dieselCost"></li>
+          <li id="driverCost"></li>
+          <li id="tollCost"></li>
+        </ul>
+      </div>
+    </div>
+
+  </main>
+
+</div>
+<script>
+/* ---------- VEHICLE NAMES ---------- */
+const vehicleNames = {
+  "7ft":"7 ft Small Pickup",
+  "8ft":"8 ft Medium Pickup",
+  "10ft":"10 ft Mini Truck",
+  "14ft":"14 ft Truck",
+  "17ft":"17 ft Truck",
+  "19ft":"19 ft Truck",
+  "22ft":"22 ft Container",
+  "24ft":"24 ft Container",
+  "32sxl":"32 ft SXL",
+  "32mxl":"32 ft MXL",
+  "40odc":"40 ft ODC"
+};
+
+/* ---------- RATE CALCULATION ---------- */
+function calculateRate(vehicle, weight, distance, dieselPrice = 90) {
+
+  const vehicles = {
+    "7ft":{capacity:1.5,rateKm:18,mileage:35},
+    "8ft":{capacity:2.5,rateKm:22,mileage:18},
+    "10ft":{capacity:3.5,rateKm:28,mileage:14},
+    "14ft":{capacity:7,rateKm:36,mileage:7},
+    "17ft":{capacity:9,rateKm:42,mileage:6},
+    "19ft":{capacity:12,rateKm:48,mileage:5.5},
+    "22ft":{capacity:15,rateKm:58,mileage:5},
+    "24ft":{capacity:18,rateKm:62,mileage:4.5},
+    "32sxl":{capacity:20,rateKm:78,mileage:3.5},
+    "32mxl":{capacity:24,rateKm:82,mileage:3.5},
+    "40odc":{capacity:30,rateKm:120,mileage:2.8}
+  };
+
+  if (!vehicles[vehicle]) {
+    return { error: "Please select a vehicle type" };
+  }
+
+  if (isNaN(weight) || weight <= 0) {
+    return { error: "Please enter valid weight" };
+  }
+
+  if (isNaN(distance) || distance <= 0) {
+    return { error: "Please enter valid distance" };
+  }
+
+  const v = vehicles[vehicle];
+
+  if (weight > v.capacity) {
+    return { error: "Weight exceeds selected vehicle capacity" };
+  }
+
+  const diesel = (distance / v.mileage) * dieselPrice;
+  const driver = distance <= 800 ? 3500 : 7000;
+  const toll = distance <= 800 ? 3000 : 7000;
+  const maintenance = distance * 4;
+
+  const operating = diesel + driver + toll + maintenance;
+  const profit = operating * 0.12;
+  const risk = operating * 0.05;
+
+  const market = distance * v.rateKm;
+  const finalFreight = Math.round(
+    Math.max(operating + profit + risk, market)
+  );
+
+  return {
+    finalFreight,
+    breakdown: {
+      diesel: Math.round(diesel),
+      driver,
+      toll,
+      marketFreight: Math.round(market)
     }
+  };
+}
 
-    function setupFormHandler(config) {
-      const form = document.getElementById('freight-form');
-      const submitBtn = document.getElementById('submit-btn');
-      const resultDiv = document.getElementById('result');
-      const accentColor = config.accent_color || defaultConfig.accent_color;
-      const baseSize = config.font_size || defaultConfig.font_size;
-      const textColor = config.text_color || defaultConfig.text_color;
+/* ---------- FORM SUBMIT ---------- */
+document.getElementById("freightForm").addEventListener("submit", function (e) {
+  e.preventDefault();
 
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
+  const vehicleValue = document.getElementById("vehicle").value;
+  const weight = Number(document.getElementById("weight").value);
+  const distance = Number(document.getElementById("distance").value);
 
-        if (records.length >= 999) {
-          showNotification('Maximum limit reached. Contact support.', '#d32f2f', baseSize);
-          return;
-        }
+  const resultSection = document.getElementById("resultSection");
+  resultSection.classList.add("hidden"); // reset
 
-        const distance = parseFloat(document.getElementById('distance').value);
-        const weight = parseFloat(document.getElementById('weight').value);
-        const additionalInfo = document.getElementById('additional-info').value;
+  const result = calculateRate(vehicleValue, weight, distance);
 
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<div class="shimmer-effect" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">Calculating...</div>';
-        submitBtn.style.opacity = '0.7';
+  if (result.error) {
+    alert(result.error);
+    return;
+  }
 
-        try {
-          await new Promise(resolve => setTimeout(resolve, 600));
+  document.getElementById("resultVehicle").textContent =
+    vehicleNames[vehicleValue];
 
-          const vehicles = getSuggestedVehicles(weight , distance);
-          const costs = calculateRate(weight, distance);
+  document.getElementById("resultDistance").textContent =
+    distance + " KM";
 
-          const vehiclesList = document.getElementById('vehicles-list');
-          vehiclesList.innerHTML = vehicles.map((v, index) => `
-            <div class="animate-slide-in-right"
-                style="animation-delay: ${index * 0.05}s;
-                        border-left: 2px solid ${accentColor};
-                        padding: 10px 0 10px 14px;
-                        margin-bottom: 10px;">
+  document.getElementById("resultAmount").textContent =
+    "₹" + result.finalFreight.toLocaleString("en-IN");
 
-              <div style="font-weight: 700;
-                          font-size: ${baseSize * 0.95}px;
-                          color: ${textColor};">
-                ${v.name}
-              </div>
+  document.getElementById("marketFreight").textContent =
+    "• Market Freight: ₹" + result.breakdown.marketFreight.toLocaleString("en-IN");
 
-              <div style="color: ${accentColor};
-                          font-size: ${baseSize * 0.8}px;
-                          opacity: 0.85;">
-                Length: ${v.length}
-              </div>
+  document.getElementById("dieselCost").textContent =
+    "• Diesel Cost: ₹" + result.breakdown.diesel.toLocaleString("en-IN");
 
-              <div style="margin-top: 4px;
-                          font-size: ${baseSize * 0.8}px;
-                          color: ${textColor};
-                          opacity: 0.7;">
-                ${v.purpose}
-              </div>
-            </div>
-          `).join('');
+  document.getElementById("driverCost").textContent =
+    "• Driver Charges: ₹" + result.breakdown.driver.toLocaleString("en-IN");
 
-          document.getElementById('final-rate').textContent = `₹${costs.finalRate}`;
-          resultDiv.style.display = 'block';
+  document.getElementById("tollCost").textContent =
+    "• Toll Charges: ₹" + result.breakdown.toll.toLocaleString("en-IN");
 
-          const record = {
-            id: Date.now().toString(),
-            distance: distance,
-            weight: weight,
-            suggested_vehicle: vehicles[0].name,
-            vehicle_length: vehicles[0].length,
-            final_rate: costs.finalRate,
-            additional_info: additionalInfo,
-            created_at: new Date().toISOString()
-          };
-
-          const result = await window.dataSdk.create(record);
-          if (!result.isOk) {
-            showNotification('Failed to save. Try again.', '#d32f2f', baseSize);
-          } else {
-            showNotification('Calculation saved!', '#4caf50', baseSize);
-          }
-
-        } catch (error) {
-          showNotification('Error occurred. Try again.', '#d32f2f', baseSize);
-        } finally {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = config.button_text || defaultConfig.button_text;
-          submitBtn.style.opacity = '1';
-        }
-      });
-    }
-
-    function showNotification(message, bgColor, fontSize) {
-      const notification = document.createElement('div');
-      notification.textContent = message;
-      notification.className = 'animate-fade-in-down';
-      notification.style.cssText = `position: fixed; top: 20px; right: 20px; background-color: ${bgColor}; color: white; padding: 12px 20px; border-radius: 6px; z-index: 1000; font-size: ${fontSize * 0.9}px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);`;
-      document.body.appendChild(notification);
-      setTimeout(() => notification.remove(), 3000);
-    }
-
-    async function init() {
-        if (window.dataSdk) {
-            const initResult = await window.dataSdk.init(dataHandler);
-            if (!initResult.isOk) {
-            console.error('Failed to initialize data SDK');
-            }
-        }
-
-        if (window.elementSdk) {
-            await window.elementSdk.init({
-            defaultConfig,
-            onConfigChange,
-            mapToCapabilities: () => ({}),
-            mapToEditPanelValues: () => new Map()
-            });
-
-            await onConfigChange(window.elementSdk.config);
-        } else {
-            // 🔥 FALLBACK FOR NORMAL BROWSER
-            console.warn("elementSdk not found, loading default UI");
-            await onConfigChange(defaultConfig);
-        }
-        }
+  resultSection.classList.remove("hidden");
+  resultSection.scrollIntoView({ behavior: "smooth" });
+});
+</script>
 
 
-    init();
-  </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9adc544061ce3b7f',t:'MTc2NTcwMDkyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
+</body>
 </html>
