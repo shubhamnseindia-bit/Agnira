@@ -3,114 +3,168 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agnira Logistics - Freight Calculator</title>
+  <title>Agnira Logistics – Freight Calculator</title>
 
-  <script src="/_sdk/element_sdk.js"></script>
-  <script src="/_sdk/data_sdk.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
-    body { box-sizing: border-box; }
-    .gradient-bg {
-      background: linear-gradient(135deg, #f1f103 0%, #df9708be 100%);
+    body {
+      box-sizing: border-box;
+      background: radial-gradient(circle at top, #0f1e2e 0%, #070d14 70%);
+      color: #e5e7eb;
+      font-family: Inter, system-ui, sans-serif;
     }
+
+    /* HEADER / HERO */
+    .gradient-bg {
+      background: linear-gradient(180deg, #0c1a29 0%, #070d14 100%);
+      border-bottom: 1px solid rgba(255,215,0,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gradient-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(255,215,0,0.12), transparent 70%);
+      pointer-events: none;
+    }
+
+    /* DARK GLASS CARD */
+    .dark-card {
+      background: rgba(15, 30, 46, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,215,0,0.15);
+    }
+
+    /* INPUTS */
+    .input-focus {
+      background: rgba(7, 13, 20, 0.9);
+      border: 1px solid rgba(255,215,0,0.25);
+      color: #ffffff;
+    }
+
+    .input-focus:focus {
+      outline: none;
+      border-color: #facc15;
+      box-shadow: 0 0 0 2px rgba(250,204,21,0.3);
+    }
+
+    select option {
+      background: #070d14;
+      color: #ffffff;
+    }
+
+    /* GOLD BUTTON */
+    .gold-btn {
+      background: linear-gradient(135deg, #facc15 0%, #ca8a04 100%);
+      color: #000000;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(250,204,21,0.35);
+    }
+
+    .gold-btn:hover {
+      background: linear-gradient(135deg, #fde047 0%, #a16207 100%);
+    }
+
+    /* RESULT ANIMATION */
     .result-card {
       animation: slideUp 0.4s ease-out;
     }
+
     @keyframes slideUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-    .input-focus:focus {
-      outline: none;
-      border-color: #c8ff00;
-      box-shadow: 0 0 0 3px rgba(59,130,246,.1);
     }
   </style>
 </head>
 
 <body class="h-full">
-<div id="app" class="w-full h-full overflow-auto">
+<div class="w-full h-full overflow-auto">
 
   <!-- HEADER -->
-  <header class="gradient-bg text-white py-12 px-6 text-center">
-    <h1 id="companyName" class="text-5xl font-bold mb-3">Agnira Logistics</h1>
-    <h2 id="pageTitle" class="text-3xl font-semibold mb-2">Freight Calculator</h2>
-    <p id="tagline" class="text-xl opacity-90">
-      Calculate your shipping costs instantly
+  <header class="gradient-bg py-16 px-6 text-center">
+    <h1 class="text-5xl font-bold text-yellow-400 mb-3">
+      AGNIRA LOGISTICS
+    </h1>
+    <h2 class="text-3xl font-semibold text-white mb-4">
+      Freight Calculator
+    </h2>
+    <p class="text-lg text-gray-300 max-w-2xl mx-auto">
+      Transparent, reliable freight pricing engineered for businesses across India.
     </p>
   </header>
 
   <!-- MAIN -->
-  <main class="max-w-4xl mx-auto px-6 py-12">
+  <main class="max-w-4xl mx-auto px-6 py-14">
 
-    <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+    <!-- FORM CARD -->
+    <div class="dark-card rounded-2xl shadow-xl p-8 mb-10">
       <form id="freightForm">
 
-        <!-- VEHICLE -->
         <div class="mb-6">
           <label class="block text-lg font-semibold mb-3">Select Vehicle Type</label>
-          <select id="vehicle" required
-            class="w-full px-4 py-3 text-lg border-2 rounded-lg input-focus">
+          <select id="vehicle" required class="w-full px-4 py-3 text-lg rounded-lg input-focus">
             <option value="">Choose a vehicle...</option>
-            <option value="7ft">7 ft - Small Pickup</option>
-            <option value="8ft">8 ft - Medium Pickup</option>
-            <option value="10ft">10 ft - Mini Truck</option>
-            <option value="14ft">14 ft - Standard Truck</option>
-            <option value="17ft">17 ft - Medium Truck</option>
-            <option value="19ft">19 ft - Large Truck</option>
-            <option value="22ft">22 ft - Container Truck</option>
-            <option value="24ft">24 ft - Heavy Container</option>
-            <option value="32sxl">32 ft SXL</option>
-            <option value="32mxl">32 ft MXL</option>
-            <option value="40odc">40 ft ODC</option>
+            <option value="7ft">7 ft – Small Pickup</option>
+            <option value="8ft">8 ft – Medium Pickup</option>
+            <option value="10ft">10 ft – Mini Truck</option>
+            <option value="14ft">14 ft – Standard Truck</option>
+            <option value="17ft">17 ft – Medium Truck</option>
+            <option value="19ft">19 ft – Large Truck</option>
+            <option value="22ft">22 ft – Container</option>
+            <option value="24ft">24 ft – Heavy Container</option>
+            <option value="32sxl">32 ft – SXL</option>
+            <option value="32mxl">32 ft – MXL</option>
+            <option value="40odc">40 ft – ODC</option>
           </select>
         </div>
 
-        <!-- WEIGHT -->
         <div class="mb-6">
           <label class="block text-lg font-semibold mb-3">Weight (Tons)</label>
-          <input id="weight" type="number" step="0.1" min="0.1" required
-            class="w-full px-4 py-3 text-lg border-2 rounded-lg input-focus" />
+          <input id="weight" type="number" step="0.1" min="0.1"
+            class="w-full px-4 py-3 text-lg rounded-lg input-focus" required />
         </div>
 
-        <!-- DISTANCE -->
-        <div class="mb-6">
+        <div class="mb-8">
           <label class="block text-lg font-semibold mb-3">Distance (KM)</label>
-          <input id="distance" type="number" min="1" required
-            class="w-full px-4 py-3 text-lg border-2 rounded-lg input-focus" />
+          <input id="distance" type="number" min="1"
+            class="w-full px-4 py-3 text-lg rounded-lg input-focus" required />
         </div>
 
-        <button id="calculateBtn" type="submit"
-          class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold text-xl py-4 rounded-lg">
+        <button type="submit"
+          class="w-full gold-btn text-xl py-4 rounded-full transition-all">
           Calculate Freight Cost
         </button>
-
       </form>
     </div>
 
     <!-- RESULT -->
     <div id="resultSection" class="hidden">
-      <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-8 result-card">
-        <h3 class="text-2xl font-bold text-center mb-6">Freight Calculation Result</h3>
+      <div class="dark-card rounded-2xl p-8 result-card">
+
+        <h3 class="text-2xl font-bold text-center mb-8 text-yellow-400">
+          Freight Calculation Result
+        </h3>
 
         <div class="grid md:grid-cols-2 gap-6 mb-6">
-          <div class="bg-white p-4 rounded">
-            <p class="text-sm text-gray-600">Vehicle</p>
+          <div class="bg-black/40 p-4 rounded">
+            <p class="text-sm text-gray-400">Vehicle</p>
             <p id="resultVehicle" class="text-xl font-semibold"></p>
           </div>
-          <div class="bg-white p-4 rounded">
-            <p class="text-sm text-gray-600">Distance</p>
+          <div class="bg-black/40 p-4 rounded">
+            <p class="text-sm text-gray-400">Distance</p>
             <p id="resultDistance" class="text-xl font-semibold"></p>
           </div>
         </div>
 
-        <div class="bg-blue-600 text-white rounded-xl p-6 text-center">
-          <p class="text-lg">Total Freight</p>
+        <div class="bg-yellow-500 text-black rounded-xl p-6 text-center mb-6">
+          <p class="text-lg font-semibold">Total Freight</p>
           <p id="resultAmount" class="text-5xl font-bold"></p>
         </div>
 
-        <ul class="mt-6 bg-white p-4 rounded text-sm space-y-1">
+        <ul class="bg-black/40 p-4 rounded text-sm space-y-1">
           <li id="marketFreight"></li>
           <li id="dieselCost"></li>
           <li id="driverCost"></li>
@@ -120,129 +174,58 @@
     </div>
 
   </main>
-
 </div>
+
 <script>
-/* ---------- VEHICLE NAMES ---------- */
 const vehicleNames = {
-  "7ft":"7 ft Small Pickup",
-  "8ft":"8 ft Medium Pickup",
-  "10ft":"10 ft Mini Truck",
-  "14ft":"14 ft Truck",
-  "17ft":"17 ft Truck",
-  "19ft":"19 ft Truck",
-  "22ft":"22 ft Container",
-  "24ft":"24 ft Container",
-  "32sxl":"32 ft SXL",
-  "32mxl":"32 ft MXL",
-  "40odc":"40 ft ODC"
+  "7ft":"7 ft Small Pickup","8ft":"8 ft Medium Pickup","10ft":"10 ft Mini Truck",
+  "14ft":"14 ft Truck","17ft":"17 ft Truck","19ft":"19 ft Truck",
+  "22ft":"22 ft Container","24ft":"24 ft Container",
+  "32sxl":"32 ft SXL","32mxl":"32 ft MXL","40odc":"40 ft ODC"
 };
 
-/* ---------- RATE CALCULATION ---------- */
 function calculateRate(vehicle, weight, distance, dieselPrice = 90) {
-
   const vehicles = {
-    "7ft":{capacity:1.5,rateKm:18,mileage:35},
-    "8ft":{capacity:2.5,rateKm:22,mileage:18},
-    "10ft":{capacity:3.5,rateKm:28,mileage:14},
-    "14ft":{capacity:7,rateKm:36,mileage:7},
-    "17ft":{capacity:9,rateKm:42,mileage:6},
-    "19ft":{capacity:12,rateKm:48,mileage:5.5},
-    "22ft":{capacity:15,rateKm:58,mileage:5},
-    "24ft":{capacity:18,rateKm:62,mileage:4.5},
-    "32sxl":{capacity:20,rateKm:78,mileage:3.5},
-    "32mxl":{capacity:24,rateKm:82,mileage:3.5},
-    "40odc":{capacity:30,rateKm:120,mileage:2.8}
+    "7ft":{c:1.5,r:18,m:35},"8ft":{c:2.5,r:22,m:18},"10ft":{c:3.5,r:28,m:14},
+    "14ft":{c:7,r:36,m:7},"17ft":{c:9,r:42,m:6},"19ft":{c:12,r:48,m:5.5},
+    "22ft":{c:15,r:58,m:5},"24ft":{c:18,r:62,m:4.5},
+    "32sxl":{c:20,r:78,m:3.5},"32mxl":{c:24,r:82,m:3.5},
+    "40odc":{c:30,r:120,m:2.8}
   };
+  if (!vehicles[vehicle]) return { error:"Select vehicle" };
+  if (weight<=0||distance<=0) return { error:"Invalid input" };
+  if (weight>vehicles[vehicle].c) return { error:"Weight exceeds capacity" };
 
-  if (!vehicles[vehicle]) {
-    return { error: "Please select a vehicle type" };
-  }
-
-  if (isNaN(weight) || weight <= 0) {
-    return { error: "Please enter valid weight" };
-  }
-
-  if (isNaN(distance) || distance <= 0) {
-    return { error: "Please enter valid distance" };
-  }
-
-  const v = vehicles[vehicle];
-
-  if (weight > v.capacity) {
-    return { error: "Weight exceeds selected vehicle capacity" };
-  }
-
-  const diesel = (distance / v.mileage) * dieselPrice;
-  const driver = distance <= 800 ? 3500 : 7000;
-  const toll = distance <= 800 ? 3000 : 7000;
-  const maintenance = distance * 4;
-
-  const operating = diesel + driver + toll + maintenance;
-  const profit = operating * 0.12;
-  const risk = operating * 0.05;
-
-  const market = distance * v.rateKm;
-  const finalFreight = Math.round(
-    Math.max(operating + profit + risk, market)
-  );
+  const v=vehicles[vehicle];
+  const diesel=(distance/v.m)*dieselPrice;
+  const driver=distance<=800?3500:7000;
+  const toll=distance<=800?3000:7000;
+  const operating=diesel+driver+toll+(distance*4);
+  const final=Math.max(operating*1.17,distance*v.r);
 
   return {
-    finalFreight,
-    breakdown: {
-      diesel: Math.round(diesel),
-      driver,
-      toll,
-      marketFreight: Math.round(market)
-    }
+    finalFreight:Math.round(final),
+    breakdown:{diesel:Math.round(diesel),driver,toll,marketFreight:Math.round(distance*v.r)}
   };
 }
 
-/* ---------- FORM SUBMIT ---------- */
-document.getElementById("freightForm").addEventListener("submit", function (e) {
+document.getElementById("freightForm").addEventListener("submit",e=>{
   e.preventDefault();
+  const v=document.getElementById("vehicle").value;
+  const w=+weight.value,d=+distance.value;
+  const r=calculateRate(v,w,d);
+  if(r.error)return alert(r.error);
 
-  const vehicleValue = document.getElementById("vehicle").value;
-  const weight = Number(document.getElementById("weight").value);
-  const distance = Number(document.getElementById("distance").value);
-
-  const resultSection = document.getElementById("resultSection");
-  resultSection.classList.add("hidden"); // reset
-
-  const result = calculateRate(vehicleValue, weight, distance);
-
-  if (result.error) {
-    alert(result.error);
-    return;
-  }
-
-  document.getElementById("resultVehicle").textContent =
-    vehicleNames[vehicleValue];
-
-  document.getElementById("resultDistance").textContent =
-    distance + " KM";
-
-  document.getElementById("resultAmount").textContent =
-    "₹" + result.finalFreight.toLocaleString("en-IN");
-
-  document.getElementById("marketFreight").textContent =
-    "• Market Freight: ₹" + result.breakdown.marketFreight.toLocaleString("en-IN");
-
-  document.getElementById("dieselCost").textContent =
-    "• Diesel Cost: ₹" + result.breakdown.diesel.toLocaleString("en-IN");
-
-  document.getElementById("driverCost").textContent =
-    "• Driver Charges: ₹" + result.breakdown.driver.toLocaleString("en-IN");
-
-  document.getElementById("tollCost").textContent =
-    "• Toll Charges: ₹" + result.breakdown.toll.toLocaleString("en-IN");
-
+  resultVehicle.textContent=vehicleNames[v];
+  resultDistance.textContent=d+" KM";
+  resultAmount.textContent="₹"+r.finalFreight.toLocaleString("en-IN");
+  marketFreight.textContent="• Market Freight: ₹"+r.breakdown.marketFreight;
+  dieselCost.textContent="• Diesel: ₹"+r.breakdown.diesel;
+  driverCost.textContent="• Driver: ₹"+r.breakdown.driver;
+  tollCost.textContent="• Toll: ₹"+r.breakdown.toll;
   resultSection.classList.remove("hidden");
-  resultSection.scrollIntoView({ behavior: "smooth" });
 });
 </script>
-
-
 
 </body>
 </html>
