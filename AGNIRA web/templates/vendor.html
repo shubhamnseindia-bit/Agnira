@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Agnira Logistics | Partner Registration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg-dark: #050b18;
+      --bg-section: #08111f;
+      --accent-yellow: #ffd72f;
+      --accent-yellow-soft: #ffe873;
+      --text-main: #ffffff;
+      --text-muted: #a7b3c7;
+      --border-soft: #202a3b;
+      --accent-pill: #1a2537;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #111a2b 0, #050b18 55%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    /* Top navigation */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 64px;
+      background: rgba(5, 11, 24, 0.96);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-logo-icon {
+      width: 34px;
+      height: 26px;
+      border-radius: 6px;
+      background: var(--accent-yellow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .nav-logo-icon::before {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #111111;
+      bottom: -4px;
+      left: 3px;
+      box-shadow: 16px 0 0 #111111;
+    }
+
+    .nav-title {
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      font-size: 18px;
+    }
+
+    .nav-sub {
+      font-size: 11px;
+      color: var(--accent-yellow-soft);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: inherit;
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-yellow);
+      border-color: var(--accent-yellow);
+    }
+
+    /* Hero header */
+    .page-hero {
+      max-width: 1080px;
+      margin: 40px auto 18px;
+      padding: 12px 24px 0;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--accent-pill);
+      color: var(--accent-yellow-soft);
+      font-size: 12px;
+    }
+
+    .pill span.icon {
+      font-size: 14px;
+    }
+
+    .page-title {
+      font-size: 36px;
+      margin-top: 18px;
+      line-height: 1.2;
+    }
+
+    .page-title span.highlight {
+      color: var(--accent-yellow);
+    }
+
+    .page-subtitle {
+      margin-top: 10px;
+      color: var(--text-muted);
+      max-width: 620px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* Layout */
+    .page-layout {
+      max-width: 1080px;
+      margin: 12px auto 40px;
+      padding: 0 24px 40px;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(260px, 2fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .nav {
+        padding: 14px 20px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .page-hero,
+      .page-layout {
+        padding: 16px 16px 32px;
+      }
+      .page-layout {
+        grid-template-columns: 1fr;
+      }
+      .page-title {
+        font-size: 28px;
+      }
+    }
+
+    /* Card */
+    .card {
+      background: radial-gradient(circle at top left, #101a2b 0, #050b18 60%);
+      border-radius: 20px;
+      border: 1px solid var(--border-soft);
+      padding: 24px 24px 26px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.75);
+    }
+
+    .card-header {
+      margin-bottom: 18px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Toggle buttons */
+    .toggle-wrapper {
+      display: flex;
+      margin-bottom: 18px;
+    }
+
+    .toggle-inner {
+      display: flex;
+      gap: 6px;
+      background: #050b18;
+      border-radius: 999px;
+      padding: 4px;
+      border: 1px solid var(--border-soft);
+    }
+
+    .tab-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-size: 13px;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text-muted);
+      font-weight: 500;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--accent-yellow);
+      color: #17130b;
+      font-weight: 600;
+    }
+
+    /* Forms */
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 13px;
+    }
+
+    .form-row-full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: var(--text-muted);
+    }
+
+    label span.required {
+      color: var(--accent-yellow-soft);
+      margin-left: 3px;
+    }
+
+    input,
+    select,
+    textarea {
+      background: #050b18;
+      border-radius: 10px;
+      border: 1px solid var(--border-soft);
+      padding: 9px 11px;
+      color: var(--text-main);
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease,
+        background 0.18s ease;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #65718a;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--accent-yellow);
+      box-shadow: 0 0 0 1px rgba(255, 215, 47, 0.35);
+      background: #060d1e;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: #7c8ba5;
+    }
+
+    .inline-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .inline-group > * {
+      flex: 1;
+    }
+
+    .form-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 6px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--accent-yellow);
+      border-radius: 999px;
+      border: none;
+      padding: 11px 26px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      color: #17130b;
+      box-shadow: 0 12px 25px rgba(255, 210, 70, 0.32);
+      transition: transform 0.12s ease, box-shadow 0.12s ease,
+        background 0.12s ease;
+    }
+
+    .btn-primary:hover {
+      background: #ffe35c;
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(255, 210, 70, 0.45);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      padding: 10px 22px;
+      font-size: 13px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: border-color 0.15s ease, color 0.15s ease,
+        background 0.15s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent-yellow);
+      color: var(--accent-yellow-soft);
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .small-note {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 720px) {
+      form {
+        grid-template-columns: 1fr;
+      }
+      .form-actions {
+        align-items: flex-start;
+      }
+    }
+
+    /* Right side info card */
+    .side-card-list {
+      list-style: none;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .side-card-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .side-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-yellow);
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    .badge-soft {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.12);
+      color: var(--accent-yellow-soft);
+      margin-top: 4px;
+    }
+
+    .badge-soft span {
+      font-size: 14px;
+    }
+
+    .stat-row {
+      display: flex;
+      gap: 14px;
+      margin-top: 14px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .stat-pill {
+      flex: 1;
+      padding: 7px 10px;
+      border-radius: 12px;
+      border: 1px dashed rgba(148, 163, 184, 0.35);
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .stat-pill strong {
+      display: block;
+      color: var(--accent-yellow-soft);
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+
+    .tagline {
+      font-size: 11px;
+      color: #909fbe;
+      margin-top: 6px;
+    }
+
+    /* Hide forms container by default helper class (not used but handy) */
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Top nav -->
+  <header class="nav">
+    <div class="nav-left">
+      <div class="nav-logo-icon"></div>
+      <div>
+        <div class="nav-title">AGNIRA LOGISTICS</div>
+        <div class="nav-sub">SPEEDING TO SUCCESS</div>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <a href="https://agnira-1.onrender.com/">HOME PAGE</a>
+    </nav>
+  </header>
+
+  <!-- Page hero -->
+  <section class="page-hero">
+    <div class="pill">
+      <span class="icon">🚚</span>
+      Join Our Pan-India Transport Network
+    </div>
+    <h1 class="page-title">
+      Partner with <span class="highlight">Agnira</span> Logistics
+    </h1>
+    <p class="page-subtitle">
+      Choose whether you are a fleet owner with your own vehicles or a market
+      transporter, then complete the quick registration form to start working
+      with us.[web:57]
+    </p>
+  </section>
+
+  <!-- Main layout -->
+  <main class="page-layout">
+    <!-- Left: registration with toggle -->
+    <section class="card">
+      <div class="card-header">
+        <h2 class="card-title">Partner Registration</h2>
+        <p class="card-desc">
+          Select your profile type below. Only one form is visible at a time so
+          you can focus on sharing clear and accurate details.[web:39]
+        </p>
+      </div>
+
+      <!-- Toggle buttons -->
+      <div class="toggle-wrapper form-row-full">
+        <div class="toggle-inner">
+          <button type="button" id="tab-fleet" class="tab-btn active">
+            Fleet Owner
+          </button>
+          <button type="button" id="tab-transporter" class="tab-btn">
+            Transporter
+          </button>
+        </div>
+      </div>
+
+      <!-- FLEET OWNER FORM -->
+      <form id="fleet-form">
+        <div class="form-group form-row-full">
+          <label for="fleetFirm">
+            Fleet / company name <span class="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="fleetFirm"
+            name="fleetFirm"
+            placeholder="e.g. Shree Ganesh Fleet Services"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="fleetOwner">
+            Fleet owner name <span class="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="fleetOwner"
+            name="fleetOwner"
+            placeholder="Full name"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="fleetDesignation">Designation</label>
+          <input
+            type="text"
+            id="fleetDesignation"
+            name="fleetDesignation"
+            placeholder="Owner / Partner / Director"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="fleetPhone">
+            Mobile number <span class="required">*</span>
+          </label>
+          <input
+            type="tel"
+            id="fleetPhone"
+            name="fleetPhone"
+            placeholder="+91 XXXXX XXXXX"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="fleetAltPhone">Alternate phone</label>
+          <input
+            type="tel"
+            id="fleetAltPhone"
+            name="fleetAltPhone"
+            placeholder="+91 XXXXX XXXXX"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="fleetEmail">
+            Email ID <span class="required">*</span>
+          </label>
+          <input
+            type="email"
+            id="fleetEmail"
+            name="fleetEmail"
+            placeholder="you@example.com"
+            required
+          />
+        </div>
+
+        <div class="form-group form-row-full">
+          <label for="fleetAddress">
+            Office / yard address <span class="required">*</span>
+          </label>
+          <textarea
+            id="fleetAddress"
+            name="fleetAddress"
+            placeholder="Address with city, state and PIN"
+            required
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="fleetCity">
+            City <span class="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="fleetCity"
+            name="fleetCity"
+            placeholder="e.g. Ahmedabad"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="fleetState">
+            State <span class="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="fleetState"
+            name="fleetState"
+            placeholder="e.g. Gujarat"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="fleetPincode">
+            PIN code <span class="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="fleetPincode"
+            name="fleetPincode"
+            maxlength="6"
+            placeholder="6-digit PIN"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="fleetGst">GSTIN (optional)</label>
+          <input
+            type="text"
+            id="fleetGst"
+            name="fleetGst"
+            placeholder="15-character GST number"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="fleetPan">PAN (optional)</label>
+          <input
+            type="text"
+            id="fleetPan"
+            name="fleetPan"
+            placeholder="10-character PAN"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="fleetSize">
+            Total vehicles owned <span class="required">*</span>
+          </label>
+          <input
+            type="number"
+            id="fleetSize"
+            name="fleetSize"
+            min="1"
+            placeholder="e.g. 25"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="fleetVehicleTypes">Vehicle mix</label>
+          <input
+            type="text"
+            id="fleetVehicleTypes"
+            name="fleetVehicleTypes"
+            placeholder="e.g. 32FT MXL, container, trailer"
+          />
+        </div>
+
+        <div class="form-group form-row-full">
+          <label for="fleetRoutes">Primary operating routes</label>
+          <textarea
+            id="fleetRoutes"
+            name="fleetRoutes"
+            placeholder="e.g. West India, North India, specific corridors"
+          ></textarea>
+        </div>
+
+        <div class="form-group form-row-full">
+          <label for="fleetBank">
+            Bank details (optional – for faster payments)
+          </label>
+          <textarea
+            id="fleetBank"
+            name="fleetBank"
+            placeholder="Bank name, branch, account number, IFSC"
+          ></textarea>
+        </div>
+
+        <div class="form-group form-row-full">
+          <label for="fleetNotes">Any additional information</label>
+          <textarea
+            id="fleetNotes"
+            name="fleetNotes"
+            placeholder="Share any specific requirements or commitments."
+          ></textarea>
+        </div>
+
+        <div class="form-actions">
+          <div>
+            <button type="submit" class="btn-primary">
+              Submit Fleet Details
+            </button>
+            <button type="reset" class="btn-secondary">
+              Clear
+            </button>
+          </div>
+          <p class="small-note">
+            Fleet information helps us allocate dedicated and contract loads more efficiently.[web:31]
+          </p>
+        </div>
+      </form>
+
+      <!-- TRANSPORTER FORM -->
+      <form id="transporter-form" class="hidden">
+        <div class="form-group form-row-full">
+          <label for="legalName">
+            Transport firm name <span class="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="legalName"
+            name="legalName"
+            placeholder="e.g. Shree Ganesh Roadlines"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="contactPerson">
+            Primary contact person <span class="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="contactPerson"
+            name="contactPerson"
+            placeholder="Full name"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="designation">Designation</label>
+          <input
+            type="text"
+            id="designation"
+            name="designation"
+            placeholder="Owner / Partner / Operations Head"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">
+            Mobile number <span class="required">*</span>
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="+91 XXXXX XXXXX"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="altPhone">Alternate phone</label>
+          <input
+            type="tel"
+            id="altPhone"
+            name="altPhone"
+            placeholder="+91 XXXXX XXXXX"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">
+            Email ID <span class="required">*</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="you@example.com"
+            required
+          />
+        </div>
+
+        <div class="form-group form-row-full">
+          <label for="officeAddress">
+            Office address <span class="required">*</span>
+          </label>
+          <textarea
+            id="officeAddress"
+            name="officeAddress"
+            placeholder="Flat / office no., building, street, area, city, state, PIN"
+            required
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="city">
+            City <span class="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="city"
+            name="city"
+            placeholder="e.g. Ahmedabad"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="state">
+            State <span class="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="state"
+            name="state"
+            placeholder="e.g. Gujarat"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="pincode">
+            PIN code <span class="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="pincode"
+            name="pincode"
+            maxlength="6"
+            placeholder="6-digit PIN"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="gst">GSTIN (optional)</label>
+          <input
+            type="text"
+            id="gst"
+            name="gst"
+            placeholder="15-character GST number"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="pan">PAN (optional)</label>
+          <input
+            type="text"
+            id="pan"
+            name="pan"
+            placeholder="10-character PAN"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="yearsInBusiness">Years in business</label>
+          <input
+            type="number"
+            min="0"
+            id="yearsInBusiness"
+            name="yearsInBusiness"
+            placeholder="e.g. 5"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="businessType">Business type</label>
+          <select id="businessType" name="businessType">
+            <option value="">Select</option>
+            <option value="proprietorship">Proprietorship</option>
+            <option value="partnership">Partnership</option>
+            <option value="pvtltd">Private Limited</option>
+            <option value="llp">LLP</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group form-row-full">
+          <label>Fleet information (optional)</label>
+          <div class="inline-group">
+            <input
+              type="number"
+              min="0"
+              name="ownedVehicles"
+              placeholder="Owned vehicles"
+            />
+            <input
+              type="number"
+              min="0"
+              name="attachedVehicles"
+              placeholder="Attached / market vehicles"
+            />
+          </div>
+        </div>
+
+        <div class="form-group form-row-full">
+          <label for="vehicleTypes">Vehicle types handled</label>
+          <input
+            type="text"
+            id="vehicleTypes"
+            name="vehicleTypes"
+            placeholder="e.g. 20FT / 32FT MXL, container, open body, trailer"
+          />
+        </div>
+
+        <div class="form-group form-row-full">
+          <label for="routes">Preferred operating routes</label>
+          <textarea
+            id="routes"
+            name="routes"
+            placeholder="e.g. Ahmedabad–Mumbai, Delhi–NCR, All India etc."
+          ></textarea>
+        </div>
+
+        <div class="form-group form-row-full">
+          <label for="bankDetails">
+            Bank details (optional – for faster payments)
+          </label>
+          <textarea
+            id="bankDetails"
+            name="bankDetails"
+            placeholder="Bank name, branch, account number, IFSC"
+          ></textarea>
+        </div>
+
+        <div class="form-group form-row-full">
+          <label for="services">Services offered / specialisation</label>
+          <textarea
+            id="services"
+            name="services"
+            placeholder="e.g. FTL, PTL, express, ODC, temperature-controlled"
+          ></textarea>
+        </div>
+
+        <div class="form-group form-row-full">
+          <label for="notes">Any additional information</label>
+          <textarea
+            id="notes"
+            name="notes"
+            placeholder="Share anything important about your operations."
+          ></textarea>
+        </div>
+
+        <div class="form-actions">
+          <div>
+            <button type="submit" class="btn-primary">
+              Submit Transporter Details
+            </button>
+            <button type="reset" class="btn-secondary">
+              Clear
+            </button>
+          </div>
+          <p class="small-note">
+            Transporter details help us match you with relevant lanes and loads.[web:40]
+          </p>
+        </div>
+      </form>
+    </section>
+
+    <!-- Right: info / benefits card -->
+    <aside class="card">
+      <h2 class="card-title">Why partner with us?</h2>
+      <p class="card-desc">
+        Agnira Logistics collaborates with reliable fleet owners and
+        transporters to deliver time-critical loads with transparent payments
+        and long-term relationships.[web:57]
+      </p>
+
+      <ul class="side-card-list">
+        <li>
+          <div class="side-dot"></div>
+          <div>
+            Regular loads on key corridors through enterprise and SME customers.
+          </div>
+        </li>
+        <li>
+          <div class="side-dot"></div>
+          <div>
+            Transparent documentation and trip-wise communication for every
+            dispatch.
+          </div>
+        </li>
+        <li>
+          <div class="side-dot"></div>
+          <div>
+            Focus on safety, valid permits, insurance, and on-time delivery.
+          </div>
+        </li>
+        <li>
+          <div class="side-dot"></div>
+          <div>
+            Dedicated support team to coordinate loading, routing, and POD
+            collection.
+          </div>
+        </li>
+      </ul>
+
+      <div class="badge-soft">
+        <span>⭐</span>
+        Priority for compliant, on-time partners
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-pill">
+          <strong>48–72 hrs</strong>
+          Typical onboarding time once details and documents are verified.
+        </div>
+        <div class="stat-pill">
+          <strong>Pan-India</strong>
+          Loads across major metro and industrial clusters.
+        </div>
+      </div>
+
+      <p class="tagline">
+        After submitting, our team will call you to confirm details and share
+        the next steps for live load allocation.
+      </p>
+    </aside>
+  </main>
+
+  <!-- JS: toggle and basic submit handlers -->
+  <script>
+  const fleetTab = document.getElementById("tab-fleet");
+  const transporterTab = document.getElementById("tab-transporter");
+  const fleetForm = document.getElementById("fleet-form");
+  const transporterForm = document.getElementById("transporter-form");
+
+  function setActiveTab(type) {
+    if (type === "fleet") {
+      fleetTab.classList.add("active");
+      transporterTab.classList.remove("active");
+      fleetForm.classList.remove("hidden");
+      transporterForm.classList.add("hidden");
+    } else {
+      transporterTab.classList.add("active");
+      fleetTab.classList.remove("active");
+      transporterForm.classList.remove("hidden");
+      fleetForm.classList.add("hidden");
+    }
+  }
+
+  fleetTab.addEventListener("click", () => setActiveTab("fleet"));
+  transporterTab.addEventListener("click", () => setActiveTab("transporter"));
+
+  // ================== FLEET FORM SUBMIT ==================
+  fleetForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const fleetData = Object.fromEntries(new FormData(fleetForm));
+
+    fetch("/fleetownerdb", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        form_type: "fleet_owner",
+        payload: fleetData
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        alert("Fleet Owner details submitted successfully");
+        fleetForm.reset();
+      })
+      .catch(error => {
+        console.error("Fleet submit error:", error);
+        alert("Something went wrong. Please try again.");
+      });
+  });
+
+  // ================== TRANSPORTER FORM SUBMIT ==================
+  transporterForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const transporterData = Object.fromEntries(new FormData(transporterForm));
+
+    fetch("/transporterdb", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        form_type: "transporter",
+        payload: transporterData
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        alert("Transporter details submitted successfully");
+        transporterForm.reset();
+      })
+      .catch(error => {
+        console.error("Transporter submit error:", error);
+        alert("Something went wrong. Please try again.");
+      });
+  });
+</script>
+
+</body>
+</html>

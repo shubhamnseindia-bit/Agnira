@@ -6,6 +6,31 @@
   <title>AGNIRA LOGISTICS - Professional Logistics Solutions</title>
   <script src="/_sdk/element_sdk.js"></script>
   <style>
+    .banner-container {
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .banner-container img {
+        width: 100%;
+        height: auto;
+        display: block;
+
+        /* animation */
+        opacity: 0;
+        transform: translateX(-40px);
+        animation: bannerSlideIn 1s ease-out forwards;
+      }
+
+      @keyframes bannerSlideIn {
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+  
+
     body {
       box-sizing: border-box;
       margin: 0;
@@ -875,10 +900,15 @@
        <p id="nav-tagline">SPEEDING TO SUCCESS</p>
       </div>
      </div>
-     <div class="nav-links"><a href="#services" class="nav-link">Services</a> <a href="#about" class="nav-link">About</a> <a href="#contact" class="nav-link">Contact</a> <a href="{{ url_for('fleetowner') }}" class="nav-link">Fleet Owner</a> <a href="{{ url_for('freight_calculator') }}" class="nav-link">Freight Calculator</a>
+     <div class="nav-links"><a href="#services" class="nav-link">Services</a> <a href="#about" class="nav-link">About</a> <a href="#contact" class="nav-link">Contact</a> <a href="{{ url_for('freight_calculator') }}" class="nav-link">Freight Calculator</a> <a href="{{ url_for('vendorcorner') }}" class="nav-link">Vendor Portal</a>
      </div>
     </div>
+
    </nav><!-- Hero Section -->
+   <div class="banner-container">
+      <img src="{{ url_for('static', filename='agnira-banner.png') }}"
+          alt="Agnira Logistics Brand Banner">
+    </div>
    <section class="hero">
     <div class="hero-content">
      <div class="hero-badge">
